@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>翻面遊戲</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>翻面遊戲</h1>
+        
+        <!-- 遊戲設置區域 -->
+        <div class="settings">
+            <div class="setting-group">
+                <label for="gameRule">遊戲規則</label>
+                <select id="gameRule">
+                    <option value="cross">十字</option>
+                    <option value="x">X字</option>
+                    <option value="bigCross">大十字</option>
+                    <option value="bigX">大X字</option>
+                </select>
+            </div>
+            
+            <div class="setting-group">
+                <label for="boardWidth">棋盤寬度</label>
+                <input type="number" id="boardWidth" min="1" max="20" value="5">
+            </div>
+            
+            <div class="setting-group">
+                <label for="boardHeight">棋盤高度</label>
+                <input type="number" id="boardHeight" min="1" max="20" value="5">
+            </div>
+        </div>
+        
+        <!-- 第二列：4個控制按鈕 -->
+        <div class="controls button-row">
+            <button id="randomBtn" class="btn">隨機</button>
+            <button id="manualBtn" class="btn">自訂</button>
+            <button id="startBtn" class="btn">開始</button>
+            <button id="resetBtn" class="btn">重置</button>
+        </div>
+        
+        <!-- 第三列：歷程記錄資訊和導航按鈕 -->
+        <div class="history-section">
+            <div class="history-info-text">
+                <span id="totalHistoryCount">總共 0 次</span>
+                <span id="currentHistoryIndex">現在第 0 次</span>
+            </div>
+            <div class="history-navigation">
+                <button id="prevBtn" class="btn history-btn" disabled>上一步</button>
+                <button id="nextBtn" class="btn history-btn" disabled>下一步</button>
+            </div>
+        </div>
+        
+        <!-- 棋盤區域 -->
+        <div class="board-container">
+            <div id="gameBoard" class="game-board"></div>
+        </div>
+        
+        <!-- 遊戲狀態 -->
+        <div class="game-status">
+            <p id="statusText">請選擇遊戲規則和棋盤大小，然後點擊開始遊戲</p>
+        </div>
+    </div>
+    
+    <!-- 版權信息 -->
+    <div class="copyright">
+        <p>Cursor 2025 By pcshmath W.Y.</p>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html> 

@@ -1,0 +1,577 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: #a1bb9c;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    max-width: 800px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 30px;
+    font-size: 2.5em;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* 設置區域樣式 */
+.settings {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #f8f9fa;
+    padding: clamp(15px, 3vw, 25px);
+    border-radius: 12px;
+    margin-bottom: clamp(20px, 4vw, 35px);
+    flex-wrap: nowrap;
+    gap: clamp(8px, 2vw, 15px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    height: 80px;
+}
+
+.setting-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: clamp(4px, 1vw, 8px);
+    flex: 0 1 auto;
+    min-width: fit-content;
+    max-width: clamp(100px, 15vw, 140px);
+}
+
+.setting-group label {
+    font-weight: 600;
+    color: #444;
+    font-size: 14px;
+    text-align: center;
+    margin-bottom: 2px;
+    white-space: nowrap;
+}
+
+.setting-group select,
+.setting-group input {
+    padding: clamp(4px, 1.2vw, 8px) clamp(6px, 1.5vw, 10px);
+    border: 2px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+    width: auto;
+    min-width: fit-content;
+    max-width: 100%;
+    box-sizing: border-box;
+    transition: all 0.3s ease;
+    background: white;
+    height: 35px;
+}
+
+.setting-group select:focus,
+.setting-group input:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    transform: translateY(-1px);
+}
+
+/* 歷程記錄區域樣式 */
+.history-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #f8f9fa;
+    padding: clamp(10px, 2vw, 15px);
+    border-radius: 8px;
+    margin-bottom: clamp(15px, 3vw, 25px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    flex-wrap: nowrap;
+    gap: clamp(20px, 4vw, 30px);
+    height: 60px;
+}
+
+.history-info-text {
+    display: flex;
+    align-items: center;
+    gap: clamp(15px, 3vw, 25px);
+    flex-wrap: wrap;
+}
+
+.history-info-text span {
+    font-size: 14px;
+    color: #555;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.history-navigation {
+    display: flex;
+    gap: clamp(8px, 2vw, 12px);
+    align-items: center;
+}
+
+.history-navigation button {
+    padding: clamp(6px, 1.2vw, 8px) clamp(10px, 1.8vw, 12px);
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    color: white;
+    white-space: nowrap;
+    height: 40px;
+}
+
+.history-navigation button:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+}
+
+.history-navigation button:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+.history-navigation button:disabled {
+    background: #ccc;
+    color: #888;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* 控制按鈕樣式 */
+.controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 30px;
+    flex-wrap: wrap;
+    width: 100%;
+    height: 70px;
+}
+
+.btn {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: fit-content;
+    white-space: nowrap;
+    width: 75%;
+    height: 50px;
+}
+
+#randomBtn {
+    background: linear-gradient(45deg, #ff6b6b, #ee5a24);
+    color: white;
+}
+
+#manualBtn {
+    background: linear-gradient(45deg, #4ecdc4, #44a08d);
+    color: white;
+}
+
+#startBtn {
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    color: white;
+}
+
+#resetBtn {
+    background: linear-gradient(45deg, #95a5a6, #7f8c8d);
+    color: white;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+/* 棋盤容器 */
+.board-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.game-board {
+    display: grid;
+    gap: 4px;
+    background: #bbdefb;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+
+/* 棋子樣式 */
+.tile {
+    width: 40px;
+    height: 40px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+    position: relative;
+    overflow: hidden;
+    transform-style: preserve-3d;
+    box-shadow: 
+        0 2px 4px rgba(0, 0, 0, 0.3),
+        inset 0 1px 2px rgba(255, 255, 255, 0.2);
+}
+
+.tile.black {
+    background: linear-gradient(145deg, #34495e, #2c3e50);
+    box-shadow: 
+        0 3px 6px rgba(0, 0, 0, 0.4),
+        inset 0 1px 2px rgba(255, 255, 255, 0.1),
+        inset 0 -1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.tile.white {
+    background: linear-gradient(145deg, #f8f9fa, #e9ecef);
+    box-shadow: 
+        0 3px 6px rgba(0, 0, 0, 0.2),
+        inset 0 1px 2px rgba(255, 255, 255, 0.8),
+        inset 0 -1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.tile:hover {
+    transform: scale(1.05);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+}
+
+.tile:active {
+    transform: scale(0.95);
+}
+
+/* 翻面動畫效果 */
+.tile.flipping {
+    animation: flip 0.4s ease-in-out;
+    transform-style: preserve-3d;
+}
+
+@keyframes flip {
+    0% {
+        transform: rotateY(0deg);
+    }
+    50% {
+        transform: rotateY(90deg);
+    }
+    100% {
+        transform: rotateY(180deg);
+    }
+}
+
+/* 歷程控制區域 */
+.history-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f8f9fa;
+    padding: 15px 20px;
+    border-radius: 8px;
+    margin: 20px 0;
+    border-left: 4px solid #9c27b0;
+}
+
+.history-btn {
+    padding: 8px 16px;
+    font-size: 14px;
+    min-width: 80px;
+    background: linear-gradient(45deg, #9c27b0, #7b1fa2);
+    color: white;
+}
+
+.history-btn:disabled {
+    background: linear-gradient(45deg, #ccc, #999);
+    cursor: not-allowed;
+    transform: none;
+}
+
+.history-btn:disabled:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+/* 遊戲狀態 */
+.game-status {
+    text-align: center;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border-left: 4px solid #667eea;
+    margin-top: 20px;
+}
+
+#statusText {
+    color: #555;
+    font-size: 16px;
+    margin: 0;
+}
+
+/* 響應式設計 */
+/* 響應式設計 */
+@media (max-width: 900px) {
+    .container {
+        padding: 15px;
+        margin: 10px;
+    }
+    
+    .settings {
+        gap: clamp(8px, 2vw, 15px);
+        padding: clamp(12px, 2.5vw, 20px);
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-bottom: clamp(15px, 3vw, 25px);
+    }
+    
+    .setting-group {
+        min-width: fit-content;
+        max-width: clamp(100px, 15vw, 140px);
+        gap: clamp(3px, 0.8vw, 6px);
+    }
+    
+    .setting-group label {
+        font-size: 14px;
+    }
+    
+    .setting-group select,
+    .setting-group input {
+        padding: clamp(4px, 1.2vw, 8px) clamp(6px, 1.5vw, 10px);
+        font-size: 14px;
+        height: 35px;
+    }
+    
+    .controls {
+        gap: 10px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .btn {
+        font-size: 16px;
+        padding: 12px 20px;
+        width: 75%;
+        height: 50px;
+    }
+    
+    .history-section {
+        gap: 15px;
+        padding: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .history-info-text {
+        gap: 15px;
+    }
+    
+    .history-info-text span {
+        font-size: 14px;
+    }
+    
+    .history-navigation {
+        gap: clamp(8px, 2vw, 12px);
+    }
+    
+    .history-navigation button {
+        font-size: 14px;
+        padding: clamp(6px, 1.2vw, 8px) clamp(10px, 1.8vw, 12px);
+        height: 40px;
+    }
+    
+    .tile {
+        width: clamp(32px, 6vw, 40px);
+        height: clamp(32px, 6vw, 40px);
+    }
+    
+    h1 {
+        font-size: 2.2em;
+        margin-bottom: clamp(20px, 3vw, 25px);
+    }
+}
+
+
+
+
+
+.unified-controls {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    background: #f8f9fa;
+    padding: 16px 12px;
+    border-radius: 10px;
+    margin: 24px 0 18px 0;
+    box-shadow: 0 2px 8px rgba(60,60,120,0.06);
+}
+.unified-controls label {
+    margin-right: 4px;
+    font-weight: 500;
+    color: #333;
+}
+.unified-controls input[type="number"],
+.unified-controls select {
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: 1px solid #bbb;
+    font-size: 15px;
+    margin-right: 8px;
+    outline: none;
+    transition: border 0.2s;
+    min-width: 60px;
+    box-sizing: border-box;
+}
+.unified-controls input[type="number"]:focus,
+.unified-controls select:focus {
+    border: 1.5px solid #7b1fa2;
+}
+.unified-controls .btn {
+    background: linear-gradient(45deg, #7b1fa2, #9c27b0);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 14px;
+    font-size: 15px;
+    font-weight: 500;
+    min-width: 90px;
+    box-shadow: 0 1px 4px rgba(60,60,120,0.08);
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
+    margin-right: 2px;
+}
+.unified-controls .btn:hover:not(:disabled) {
+    background: linear-gradient(45deg, #9c27b0, #7b1fa2);
+    transform: translateY(-2px) scale(1.04);
+    box-shadow: 0 4px 12px rgba(124,40,180,0.13);
+}
+.unified-controls .btn:active:not(:disabled) {
+    background: linear-gradient(45deg, #6a0080, #7b1fa2);
+    transform: scale(0.98);
+}
+.unified-controls .btn:disabled {
+    background: #ccc;
+    color: #888;
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+}
+@media (max-width: 900px) {
+    .unified-controls {
+        gap: 8px;
+        padding: 10px 4px;
+    }
+    .unified-controls .btn {
+        min-width: 80px;
+        font-size: 14px;
+        padding: 7px 8px;
+    }
+}
+@media (max-width: 900px) {
+    .unified-controls {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+    }
+    .unified-controls .btn,
+    .unified-controls input[type="number"],
+    .unified-controls select {
+        width: 100%;
+        min-width: 0;
+        margin-right: 0;
+    }
+}
+
+.button-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: clamp(10px, 2vw, 18px);
+    align-items: center;
+    justify-content: center;
+    background: #f8f9fa;
+    padding: clamp(12px, 2.5vw, 20px) clamp(20px, 4vw, 30px);
+    border-radius: 10px;
+    margin-bottom: clamp(15px, 3vw, 25px);
+    box-shadow: 0 2px 8px rgba(60,60,120,0.04);
+    height: 70px;
+}
+.button-row .btn {
+    width: 70px;
+    min-width: 0;
+    max-width: 100%;
+    margin: 0;
+    display: inline-block;
+    background: linear-gradient(45deg, #7b1fa2, #9c27b0);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 18px;
+    font-size: 15px;
+    font-weight: 500;
+    box-shadow: 0 1px 4px rgba(60,60,120,0.08);
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s, box-shadow 0.2s;
+}
+.button-row .btn:hover:not(:disabled) {
+    background: linear-gradient(45deg, #9c27b0, #7b1fa2);
+    transform: translateY(-2px) scale(1.04);
+    box-shadow: 0 4px 12px rgba(124,40,180,0.13);
+}
+.button-row .btn:active:not(:disabled) {
+    background: linear-gradient(45deg, #6a0080, #7b1fa2);
+    transform: scale(0.98);
+}
+.button-row .btn:disabled {
+    background: #ccc;
+    color: #888;
+    cursor: not-allowed;
+    box-shadow: none;
+    transform: none;
+}
+.button-row .history-btn {
+    width: 70PX;
+    white-space: nowrap;
+    padding-left: 8px;
+    padding-right: 8px;
+    box-sizing: border-box;
+}
+
+/* 版權信息樣式 */
+.copyright {
+    position: fixed;
+    right: 2vw;
+    bottom: calc(2vw + 20px);
+    opacity: 0.18;
+    font-family: 'Brush Script MT', cursive, sans-serif;
+    font-size: 22px;
+    color: #1d4687ef;
+    letter-spacing: 1px;
+    transform: rotate(-12deg);
+    pointer-events: none;
+    z-index: 999;
+    background: none;
+    box-shadow: none;
+    border: none;
+    margin: 0;
+    text-align: right;
+} 

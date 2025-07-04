@@ -1,0 +1,145 @@
+body {
+  margin: 0;
+  background: #ffffff00;
+  height: 100vh;
+  overflow: hidden;
+  font-family: system-ui, sans-serif;
+}
+#control-bar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  background: rgba(30,60,200,0.25);
+  color: #fff;
+  padding: 8px 8px 8px 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  z-index: 10;
+  transition: transform 0.3s;
+  height: 56px;
+  box-sizing: border-box;
+}
+#control-bar.collapsed {
+  transform: translateY(-100%);
+  height: 0 !important;
+  padding: 0 !important;
+  min-height: 0 !important;
+  overflow: hidden;
+}
+#board-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #ccc0db;
+  overflow: hidden;
+}
+#board {
+  width: 100vw;
+  height: 100vh;
+  display: block;
+  background: transparent;
+  touch-action: none;
+}
+.cell-btn {
+  fill: transparent;
+  cursor: pointer;
+}
+.cell-btn:hover {
+  filter: drop-shadow(0 0 6px #fff8);
+}
+input[type="number"] {
+  font-size: 1em;
+  width: 2.5em;
+}
+button {
+  font-size: 1em;
+  padding: 4px 16px;
+  border-radius: 6px;
+  border: none;
+  background: #fff;
+  color: #1e6be3;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+button:hover, button:active {
+  background: #1e6be3;
+  color: #fff;
+}
+#expand-bar-btn {
+  position: fixed;
+  top: 16px;
+  left: 16px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #111;
+  color: #fff;
+  font-size: 1.5em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px #0005;
+  border: none;
+  cursor: pointer;
+  z-index: 20;
+  transition: background 0.2s, color 0.2s;
+}
+#expand-bar-btn:hover {
+  background: #fff;
+  color: #111;
+}
+#watermark {
+  position: fixed;
+  top: 56px;
+  left: 0; right: 0;
+  width: 100vw;
+  text-align: center;
+  font-family: 'Brush Script MT', 'Comic Sans MS', cursive, sans-serif;
+  font-size: 2.2em;
+  color: #fff;
+  opacity: 0.25;
+  pointer-events: none;
+  z-index: 5;
+  user-select: none;
+  letter-spacing: 0.1em;
+  text-shadow: 0 2px 8px #0008;
+}
+
+#copyright {
+  position: fixed;
+  right: 2vw;
+  bottom: calc(2vw + 20px);
+  opacity: 0.6;
+  font-family: 'Brush Script MT', cursive, sans-serif;
+  font-size: 22px;
+  color: #e6f3ff;
+  letter-spacing: 1px;
+  transform: rotate(-12deg);
+  pointer-events: none;
+  z-index: 999;
+  background: none;
+  box-shadow: none;
+  border: none;
+  margin: 0;
+  text-align: right;
+}
+@media (max-width: 600px) {
+  #control-bar {
+    font-size: 0.95em;
+    height: 48px;
+    padding: 6px 4px 6px 8px;
+  }
+  #board-container {
+    top: 48px;
+    height: calc(100vh - 48px);
+  }
+  #watermark {
+    font-size: 1.2em;
+    top: 48px;
+  }
+} 

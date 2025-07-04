@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <title>生命遊戲</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="control-bar">
+    <button id="play-btn">▶</button>
+    <button id="random-btn">隨機</button>
+    <button id="setup-btn">設置</button>
+    <button id="evolve-btn">演化</button>
+    <button id="reset-btn">重置</button>
+    <span>
+      存活: <input id="survive-min" type="number" value="2" min="0" max="8" style="width:30px;"> ~
+      <input id="survive-max" type="number" value="3" min="0" max="8" style="width:30px;">
+      新生: <input id="born-min" type="number" value="3" min="0" max="8" style="width:30px;"> ~
+      <input id="born-max" type="number" value="3" min="0" max="8" style="width:30px;">
+    </span>
+    <button id="toggle-bar">收合</button>
+  </div>
+  <button id="expand-bar-btn" style="display:none;">≡</button>
+  <div id="board-container">
+    <canvas id="board"></canvas>
+  </div>
+  <div id="copyright">Cursor 2025 By pcshmath W.Y.</div>
+  <script src="script.js"></script>
+</body>
+</html> 

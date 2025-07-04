@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tic-Tac-Toe</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Tic-Tac-Toe</h1>
+    <div class="controls">
+      <div class="control-group">
+        <div class="control-label">棋盤</div>
+        <select id="board-type-select">
+          <option value="2d-3" selected>3x3</option>
+          <option value="2d-4">4x4</option>
+          <option value="2d-5">5x5</option>
+        </select>
+      </div>
+      <div class="control-group">
+        <div class="control-label">模式</div>
+        <select id="mode-select">
+          <option value="pve" selected>單人</option>
+          <option value="pvp">雙人</option>
+        </select>
+      </div>
+      <div class="control-group">
+        <div class="control-label">順序</div>
+        <select id="first-player-select">
+          <option value="O">玩家先</option>
+          <option value="X">電腦先</option>
+        </select>
+      </div>
+      <div class="control-group">
+        <div class="control-label">難度</div>
+        <select id="difficulty-select">
+          <option value="easy">簡單</option>
+          <option value="normal">普通</option>
+          <option value="hard">困難</option>
+        </select>
+      </div>
+    </div>
+    <div id="game-board" class="board"></div>
+    <div id="status" class="status"></div>
+    <button id="restart">重新開始</button>
+  </div>
+  <div class="footer">Cursor 2025 By pcshmath W.Y.</div>
+  <script src="game.js"></script>
+</body>
+</html> 
