@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>雙人豆芽遊戲</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+        <!-- 控制面板 -->
+        <div id="controlPanel" class="control-panel">
+                    <div class="panel-header">
+            <h2>豆芽遊戲</h2>
+            <button id="togglePanel" class="toggle-btn">收合</button>
+        </div>
+            
+            <div class="panel-content">
+                <div class="game-status">
+                    <div id="gameStatus" class="status-text">準備開始</div>
+                    <div id="playerInfo" class="player-info" style="display: none;">
+                        <span>當前玩家: </span>
+                        <span id="currentPlayer" class="player-indicator player-1">玩家1</span>
+                        <div id="moveCount" class="move-count">回合: 0</div>
+                    </div>
+                </div>
+                
+                <div class="settings">
+                    <div class="setting-group">
+                        <label>初始點數:</label>
+                        <div class="setting-controls">
+                            <button id="decreasePoints" class="control-btn">-</button>
+                            <span id="pointsDisplay" class="setting-value">3</span>
+                            <button id="increasePoints" class="control-btn">+</button>
+                        </div>
+                    </div>
+                    
+                    <div class="setting-group">
+                        <label>最大連接數:</label>
+                        <div class="setting-controls">
+                            <button id="decreaseConnections" class="control-btn">-</button>
+                            <span id="connectionsDisplay" class="setting-value">3</span>
+                            <button id="increaseConnections" class="control-btn">+</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="game-controls">
+                    <button id="startGame" class="game-btn primary">開始遊戲</button>
+                    <button id="reset" class="game-btn secondary">重置遊戲</button>
+                </div>
+                
+                <div class="instructions">
+                    <h3>操作說明:</h3>
+                    <ul>
+                        <li><strong>左鍵拖拽:</strong> 繪製連接線</li>
+                        <li><strong>滑鼠滾輪:</strong> 縮放盤面</li>
+                        <li><strong>滑鼠中鍵拖拽:</strong> 移動盤面</li>
+                        <li><strong>ESC:</strong> 收合/展開控制面板</li>
+                    </ul>
+                    <div class="player-colors">
+                        <div class="color-info">
+                            <span class="color-dot player1"></span>
+                            <span>玩家1 (藍色)</span>
+                        </div>
+                        <div class="color-info">
+                            <span class="color-dot player2"></span>
+                            <span>玩家2 (紫色)</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="game-rules">
+                    <h3>遊戲規則</h3>
+                    <div class="rules-content">
+                        <p><strong>Sprouts 遊戲規則：</strong></p>
+                        <ul>
+                            <li>遊戲開始時有指定數量的初始點</li>
+                            <li>玩家輪流在兩個點之間畫線連接</li>
+                            <li>每次連接時，在路徑中點會產生一個新的點</li>
+                            <li>每個點最多可以連接指定次數（最大連接數）</li>
+                            <li>線不能穿過其他線或點</li>
+                            <li>可以自連（從一個點出發回到同一點），但該點的連接數必須小於最大連接數-1</li>
+                            <li>當沒有玩家可以再畫線時，遊戲結束</li>
+                            <li>最後一個能畫線的玩家獲勝</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 控制面板收合按鈕 -->
+        <div id="controlToggle" class="control-toggle">
+            <div class="toggle-circle">⚙</div>
+        </div>
+        
+        <!-- 遊戲畫布 -->
+        <div class="canvas-container">
+            <canvas id="gameCanvas"></canvas>
+        </div>
+    </div>
+    
+    <!-- 簽名 -->
+    <div class="signature">
+        Cursor 2025 By pcshmath W.Y.
+    </div>
+    
+    <script src="game.js"></script>
+    <script>
+        // 初始化遊戲
+        const game = new SproutsGame();
+    </script>
+</body>
+</html> 
