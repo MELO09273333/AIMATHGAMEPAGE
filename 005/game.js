@@ -494,10 +494,12 @@ class SproutsGame {
         
         if (isSelfConnect) {
             // 自連：創建一個環形路徑
+            const midPoint = this.getPathMidPoint(path);
+            const safePosition = this.findSafePointPosition(midPoint, 20);
             const newPoint = {
                 id: this.points.length,
-                x: this.getPathMidPoint(path).x,
-                y: this.getPathMidPoint(path).y,
+                x: safePosition.x,
+                y: safePosition.y,
                 connections: 2
             };
             
@@ -528,10 +530,11 @@ class SproutsGame {
         } else {
             // 正常連接：創建新點（在路徑中點）
             const midPoint = this.getPathMidPoint(path);
+            const safePosition = this.findSafePointPosition(midPoint, 20);
             const newPoint = {
                 id: this.points.length,
-                x: midPoint.x,
-                y: midPoint.y,
+                x: safePosition.x,
+                y: safePosition.y,
                 connections: 2
             };
             
@@ -580,6 +583,37 @@ class SproutsGame {
         return path[midIndex];
     }
     
+    findSafePointPosition(basePoint, minDistance = 20) {
+        // 如果基礎點與現有點距離足夠遠，直接使用
+        if (!this.isPointTooClose(basePoint, minDistance)) {
+            return { x: basePoint.x, y: basePoint.y };
+        }
+        
+        // 否則尋找附近的安全位置
+        const attempts = 50;
+        const searchRadius = 50;
+        
+        for (let i = 0; i < attempts; i++) {
+            const angle = (Math.PI * 2 * i) / attempts;
+            const distance = minDistance + Math.random() * searchRadius;
+            
+            const newX = basePoint.x + Math.cos(angle) * distance;
+            const newY = basePoint.y + Math.sin(angle) * distance;
+            
+            const testPoint = { x: newX, y: newY };
+            
+            if (!this.isPointTooClose(testPoint, minDistance)) {
+                return testPoint;
+            }
+        }
+        
+        // 如果找不到安全位置，返回一個稍微偏移的位置
+        return {
+            x: basePoint.x + (Math.random() - 0.5) * minDistance,
+            y: basePoint.y + (Math.random() - 0.5) * minDistance
+        };
+    }
+    
     getPathSegment(path, startT, endT) {
         const startIndex = Math.floor(startT * (path.length - 1));
         const endIndex = Math.floor(endT * (path.length - 1));
@@ -587,12 +621,36 @@ class SproutsGame {
     }
     
     isGameOver() {
-        return this.getValidMoves().length === 0;
+        // 檢查是否只剩1個點未達到最大連接數且該點連接數為"最大連接數-1"
+        const availablePoints = this.points.filter(point => point.connections < this.maxConnections);
+        
+        // 如果沒有可用點，遊戲結束
+        if (availablePoints.length === 0) {
+            return true;
+        }
+        
+        // 如果有多個可用點，遊戲未結束
+        if (availablePoints.length > 1) {
+            return false;
+        }
+        
+        // 只剩1個可用點，檢查其連接數是否為"最大連接數-1"
+        const lastPoint = availablePoints[0];
+        return lastPoint.connections === this.maxConnections - 1;
     }
     
     getValidMoves() {
         const moves = [];
         
+        // 檢查是否只剩1個點未達到最大連接數且該點連接數為"最大連接數-1"
+        const availablePoints = this.points.filter(point => point.connections < this.maxConnections);
+        
+        // 如果只剩1個點且連接數為"最大連接數-1"，則沒有有效移動
+        if (availablePoints.length === 1 && availablePoints[0].connections === this.maxConnections - 1) {
+            return moves;
+        }
+        
+        // 否則檢查所有可能的移動
         for (let i = 0; i < this.points.length; i++) {
             for (let j = i; j < this.points.length; j++) {
                 const point1 = this.points[i];
@@ -670,18 +728,23 @@ class SproutsGame {
                     connections: 0
                 };
                 attempts++;
-            } while (this.isPointTooClose(newPoint) && attempts < 100);
+            } while (this.isPointTooClose(newPoint, minDistance) && attempts < 100);
+            
+            // 如果嘗試100次後仍然找不到合適位置，強制放置
+            if (attempts >= 100) {
+                console.warn(`無法為點 ${i} 找到合適位置，強制放置`);
+            }
             
             this.points.push(newPoint);
         }
     }
     
-    isPointTooClose(newPoint) {
+    isPointTooClose(newPoint, minDistance = 80) {
         for (const point of this.points) {
             const distance = Math.sqrt(
                 Math.pow(newPoint.x - point.x, 2) + Math.pow(newPoint.y - point.y, 2)
             );
-            if (distance < 80) {
+            if (distance < minDistance) {
                 return true;
             }
         }
