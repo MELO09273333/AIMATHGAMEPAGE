@@ -1,0 +1,510 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    overflow: hidden;
+    height: 100vh;
+}
+
+.game-container {
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+}
+
+/* 控制面板 */
+.control-panel {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(240, 248, 255, 0.95) 100%);
+    backdrop-filter: blur(15px);
+    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    min-width: 300px;
+    max-width: 350px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    max-height: calc(100vh - 60px);
+    overflow: hidden;
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+    z-index: 1000;
+}
+
+.control-panel.collapsed {
+    width: 0 !important;
+    height: 0 !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    min-width: 0 !important;
+    max-width: 0 !important;
+    overflow: hidden !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    transform: translateY(-50%) scale(0.8) !important;
+}
+
+.panel-content {
+    max-height: calc(100vh - 120px);
+    overflow-y: auto;
+    padding: 20px;
+    scrollbar-width: thin;
+    scrollbar-color: #ccc transparent;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.panel-content::-webkit-scrollbar {
+    width: 6px;
+}
+
+.panel-content::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.panel-content::-webkit-scrollbar-thumb {
+    background: #ccc;
+    border-radius: 3px;
+}
+
+.panel-content::-webkit-scrollbar-thumb:hover {
+    background: #999;
+}
+
+.panel-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 20px 15px 20px;
+    border-bottom: 2px solid rgba(102, 126, 234, 0.2);
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+    gap: 10px;
+}
+
+.panel-header h2 {
+    color: #2c3e50;
+    font-size: 26px;
+    font-weight: 700;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-align: center;
+    margin: 0;
+}
+
+.toggle-btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.toggle-btn:hover {
+    background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+/* 遊戲狀態 */
+.game-status {
+    background: linear-gradient(135deg, rgba(248, 249, 250, 0.9) 0%, rgba(240, 248, 255, 0.9) 100%);
+    padding: 20px;
+    border-radius: 12px;
+    border-left: 4px solid #667eea;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    border: 1px solid rgba(102, 126, 234, 0.1);
+}
+
+.status-text {
+    font-weight: 600;
+    color: #495057;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.player-info {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+}
+
+.player-indicator {
+    padding: 6px 12px;
+    border-radius: 16px;
+    font-weight: 600;
+    font-size: 14px;
+    color: white;
+}
+
+.player-1 {
+    background: #2196F3;
+}
+
+.player-2 {
+    background: #9C27B0;
+}
+
+.move-count {
+    font-size: 12px;
+    color: #6c757d;
+}
+
+/* 設定區域 */
+.settings {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.setting-group {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background: linear-gradient(135deg, rgba(248, 249, 250, 0.8) 0%, rgba(240, 248, 255, 0.8) 100%);
+    border-radius: 10px;
+    border: 1px solid rgba(102, 126, 234, 0.1);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.03);
+    transition: all 0.3s ease;
+}
+
+.setting-group:hover {
+    background: linear-gradient(135deg, rgba(248, 249, 250, 0.95) 0%, rgba(240, 248, 255, 0.95) 100%);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    transform: translateY(-1px);
+}
+
+.setting-group label {
+    font-weight: 600;
+    color: #2c3e50;
+    font-size: 14px;
+}
+
+.setting-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.control-btn {
+    width: 36px;
+    height: 36px;
+    border: 2px solid rgba(102, 126, 234, 0.3);
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    color: #667eea;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.control-btn:hover {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-color: #667eea;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
+
+.setting-value {
+    width: 60px;
+    text-align: center;
+    padding: 8px;
+    border: 2px solid rgba(102, 126, 234, 0.3);
+    border-radius: 8px;
+    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    font-weight: bold;
+    color: #667eea;
+    font-size: 14px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+/* 遊戲控制按鈕 */
+.game-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.game-btn {
+    padding: 14px 28px;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 600;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.game-btn.primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.game-btn.primary:hover {
+    background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+.game-btn.secondary {
+    background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
+    color: white;
+}
+
+.game-btn.secondary:hover {
+    background: linear-gradient(135deg, #5a6268 0%, #343a40 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(108, 117, 125, 0.4);
+}
+
+/* 操作說明 */
+.instructions {
+    background: linear-gradient(135deg, rgba(255, 243, 205, 0.9) 0%, rgba(255, 248, 220, 0.9) 100%);
+    padding: 20px;
+    border-radius: 12px;
+    border-left: 4px solid #ffc107;
+    box-shadow: 0 4px 15px rgba(255, 193, 7, 0.1);
+    border: 1px solid rgba(255, 193, 7, 0.2);
+}
+
+.instructions h3 {
+    color: #856404;
+    margin-bottom: 12px;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.instructions ul {
+    color: #856404;
+    padding-left: 20px;
+    margin-bottom: 15px;
+}
+
+.instructions li {
+    margin: 8px 0;
+    font-size: 14px;
+    line-height: 1.5;
+}
+
+.player-colors {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.color-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: #495057;
+}
+
+.color-dot {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    border: 2px solid white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.color-dot.player1 {
+    background: #2196F3;
+}
+
+.color-dot.player2 {
+    background: #9C27B0;
+}
+
+/* 畫布容器 */
+.canvas-container {
+    flex: 1;
+    position: relative;
+    background: rgba(255, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(5px);
+}
+
+#gameCanvas {
+    display: block;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+    cursor: crosshair;
+}
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+    .control-panel {
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100vh;
+        z-index: 100;
+        transform: translateX(-100%);
+    }
+    
+    .control-panel.visible {
+        transform: translateX(0);
+    }
+    
+    .canvas-container {
+        width: 100vw;
+    }
+    
+    .panel-header h2 {
+        font-size: 20px;
+    }
+    
+    .instructions {
+        font-size: 12px;
+    }
+    
+    .instructions ul {
+        padding-left: 15px;
+    }
+    
+    .instructions li {
+        font-size: 12px;
+    }
+}
+
+/* 隱藏控制面板時的樣式 */
+.control-panel.hidden {
+    transform: translateX(-100%);
+}
+
+/* 控制面板收合按鈕 */
+.control-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 999;
+    display: none;
+    transition: all 0.3s ease;
+}
+
+.control-toggle.visible {
+    display: block;
+}
+
+.toggle-circle {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(240, 248, 255, 0.95) 100%);
+    backdrop-filter: blur(15px);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    cursor: pointer;
+    box-shadow: 0 8px 32px rgba(31, 38, 135, 0.37);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    color: #667eea;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.toggle-circle:hover {
+    transform: scale(1.1);
+    box-shadow: 0 12px 40px rgba(31, 38, 135, 0.5);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.98) 0%, rgba(240, 248, 255, 0.98) 100%);
+    color: #5a6fd8;
+}
+
+/* 遊戲規則樣式 */
+.game-rules {
+    background: linear-gradient(135deg, rgba(248, 249, 250, 0.9) 0%, rgba(240, 248, 255, 0.9) 100%);
+    padding: 20px;
+    border-radius: 12px;
+    border-left: 4px solid #28a745;
+    box-shadow: 0 4px 15px rgba(40, 167, 69, 0.1);
+    border: 1px solid rgba(40, 167, 69, 0.2);
+}
+
+.game-rules h3 {
+    color: #2c3e50;
+    margin-bottom: 12px;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.rules-content {
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.rules-content p {
+    margin-bottom: 8px;
+    color: #495057;
+}
+
+.rules-content ul {
+    list-style-type: disc;
+    margin-left: 20px;
+    margin-bottom: 10px;
+}
+
+.rules-content li {
+    margin-bottom: 4px;
+    color: #6c757d;
+}
+
+/* 簽名樣式 */
+.signature {
+    position: fixed;
+    right: 2vw;
+    bottom: calc(2vw + 20px);
+    opacity: 0.18;
+    font-family: 'Brush Script MT', cursive, sans-serif;
+    font-size: 22px;
+    color: #4a6fa5;
+    letter-spacing: 1px;
+    transform: rotate(-12deg);
+    pointer-events: none;
+    z-index: 999;
+    background: none;
+    box-shadow: none;
+    border: none;
+    margin: 0;
+    text-align: right;
+}
+
+/* 動畫效果 */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.game-status, .settings, .game-controls, .instructions {
+    animation: fadeIn 0.5s ease-out;
+} 
