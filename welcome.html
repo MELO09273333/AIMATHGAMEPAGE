@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>歡迎頁面</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .welcome-container {
+            text-align: center;
+            padding: 40px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            max-width: 600px;
+            margin: 20px;
+        }
+
+        .welcome-title {
+            font-size: 3em;
+            margin-bottom: 20px;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .welcome-subtitle {
+            font-size: 1.2em;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .welcome-text {
+            font-size: 1em;
+            line-height: 1.6;
+            opacity: 0.8;
+        }
+
+        .game-icon {
+            font-size: 4em;
+            margin-bottom: 20px;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .welcome-title {
+                font-size: 2em;
+            }
+            
+            .welcome-subtitle {
+                font-size: 1em;
+            }
+            
+            .welcome-container {
+                padding: 20px;
+                margin: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="welcome-container">
+        <div class="game-icon">🎮</div>
+        <h1 class="welcome-title">歡迎來到遊戲世界</h1>
+        <p class="welcome-subtitle">選擇左側導覽列中的遊戲開始您的冒險</p>
+        <p class="welcome-text">
+            這裡有8個精彩的遊戲等待您來探索。<br>
+            點擊導覽列中的GAME01-GAME08按鈕來開始遊戲，<br>
+            或者點擊「網站介紹」了解更多資訊。
+        </p>
+    </div>
+</body>
+</html> 

@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>網站介紹</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 50px;
+            color: white;
+        }
+
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        .card {
+            background: rgba(255,255,255,0.95);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+
+        .card h2 {
+            color: #667eea;
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+        .card h2 i {
+            margin-right: 15px;
+            font-size: 1.2em;
+        }
+
+        .card p {
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, #a8edea 0%, #fed6e3 100%);
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border-left: 5px solid #667eea;
+        }
+
+        .feature-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .feature-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+        }
+
+        .feature-list li:last-child {
+            border-bottom: none;
+        }
+
+        .feature-list li i {
+            color: #667eea;
+            margin-right: 15px;
+            font-size: 1.2em;
+        }
+
+        .cursor-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 20px;
+            margin-top: 30px;
+        }
+
+        .cursor-section h2 {
+            color: white;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .cursor-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .cursor-feature {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .cursor-feature i {
+            font-size: 2em;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .cursor-feature h3 {
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+
+        .cursor-feature p {
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            color: white;
+            opacity: 0.8;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .content-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .card {
+                padding: 20px;
+            }
+            
+            .cursor-section {
+                padding: 20px;
+            }
+        }
+
+        .math-icon {
+            font-size: 2em;
+            margin-bottom: 20px;
+            display: block;
+            text-align: center;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎮 數學遊戲實驗室</h1>
+            <p>探索邏輯思維的趣味世界</p>
+        </div>
+
+        <div class="content-grid">
+            <div class="card">
+                <h2><i class="fas fa-user-graduate"></i>關於創作者</h2>
+                <div class="math-icon">📐</div>
+                <p>這是一個不會寫程式的數學老師，利用 <strong>Cursor AI</strong> 的強大功能，成功開發出這些數學小遊戲。</p>
+                <p>原本只是為了豐富選修課的內容，沒想到能夠創作出這些有趣的互動式教學工具。</p>
+                <div class="highlight">
+                    <strong>💡 證明：</strong>即使沒有程式設計背景，只要有好的想法和合適的工具，任何人都能成為創作者！
+                </div>
+            </div>
+
+            <div class="card">
+                <h2><i class="fas fa-gamepad"></i>遊戲特色</h2>
+                <div class="math-icon">🧩</div>
+                <p>這些遊戲與傳統遊戲不同，它們更注重：</p>
+                <ul class="feature-list">
+                    <li><i class="fas fa-search"></i>邏輯思維的培養</li>
+                    <li><i class="fas fa-brain"></i>數學概念的應用</li>
+                    <li><i class="fas fa-lightbulb"></i>策略性思考訓練</li>
+                    <li><i class="fas fa-chart-line"></i>必勝法則的探索</li>
+                    <li><i class="fas fa-cogs"></i>算法可行性的研究</li>
+                </ul>
+                <div class="highlight">
+                    <strong>🎯 目標：</strong>這些遊戲適合用來研究是否有必勝方式，探討解答的可行性，甚至作為設計新遊戲的參考原型。
+                </div>
+            </div>
+
+            <div class="card">
+                <h2><i class="fas fa-users"></i>使用建議</h2>
+                <div class="math-icon">👥</div>
+                <p>歡迎大家自行試用這些遊戲！雖然它們可能不符合一般遊戲的娛樂性，但對於：</p>
+                <ul class="feature-list">
+                    <li><i class="fas fa-graduation-cap"></i>數學教育工作者</li>
+                    <li><i class="fas fa-laptop-code"></i>程式設計學習者</li>
+                    <li><i class="fas fa-puzzle-piece"></i>邏輯遊戲愛好者</li>
+                    <li><i class="fas fa-rocket"></i>遊戲設計師</li>
+                </ul>
+                <p>這些遊戲都能提供獨特的學習價值和啟發。</p>
+            </div>
+        </div>
+
+        <div class="cursor-section">
+            <h2><i class="fas fa-magic"></i>為什麼選擇 Cursor？</h2>
+            <div class="cursor-features">
+                <div class="cursor-feature">
+                    <i class="fas fa-robot"></i>
+                    <h3>AI 輔助編程</h3>
+                    <p>強大的 AI 助手，幫助理解程式概念並生成代碼</p>
+                </div>
+                <div class="cursor-feature">
+                    <i class="fas fa-comments"></i>
+                    <h3>自然語言對話</h3>
+                    <p>用中文描述需求，AI 就能理解並實現功能</p>
+                </div>
+                <div class="cursor-feature">
+                    <i class="fas fa-lightbulb"></i>
+                    <h3>智能建議</h3>
+                    <p>即時提供代碼優化建議和最佳實踐</p>
+                </div>
+                <div class="cursor-feature">
+                    <i class="fas fa-bug"></i>
+                    <h3>錯誤修復</h3>
+                    <p>自動檢測並修復常見的程式錯誤</p>
+                </div>
+                <div class="cursor-feature">
+                    <i class="fas fa-book"></i>
+                    <h3>學習友好</h3>
+                    <p>適合初學者，提供詳細的解釋和教學</p>
+                </div>
+                <div class="cursor-feature">
+                    <i class="fas fa-rocket"></i>
+                    <h3>快速開發</h3>
+                    <p>大幅提升開發效率，讓想法快速實現</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>🎮 感謝 Cursor AI 讓數學老師也能成為遊戲開發者 🎮</p>
+            <p>希望這些遊戲能為您的學習和研究帶來啟發！</p>
+        </div>
+    </div>
+</body>
+</html> 

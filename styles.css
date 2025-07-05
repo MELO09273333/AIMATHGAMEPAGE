@@ -1,0 +1,242 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: #f5f5f5;
+    overflow: hidden;
+}
+
+/* 導覽列樣式 */
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    transition: all 0.3s ease;
+    z-index: 1000;
+    box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+}
+
+.navbar.expanded {
+    width: 250px;
+}
+
+.navbar.collapsed {
+    width: 0;
+    overflow: hidden;
+}
+
+/* 導覽列標題區域 */
+.nav-header {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 15px;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.nav-toggle {
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.nav-toggle:hover {
+    transform: scale(1.1);
+}
+
+.nav-logo {
+    width: 40px;
+    height: 40px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 18px;
+    transition: all 0.3s ease;
+}
+
+.nav-logo:hover {
+    background: rgba(255,255,255,0.3);
+    transform: scale(1.1);
+}
+
+/* 導覽列內容 */
+.nav-content {
+    padding: 20px 0;
+    height: calc(100vh - 60px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.nav-buttons {
+    flex: 1;
+}
+
+.nav-btn {
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
+    color: white;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border-left: 3px solid transparent;
+    margin: 5px 0;
+}
+
+.nav-btn:hover {
+    background: rgba(255,255,255,0.1);
+    border-left-color: #fff;
+    transform: translateX(5px);
+}
+
+.game-btn {
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.special-btn {
+    background: rgba(255,255,255,0.1);
+    border-radius: 8px;
+    margin: 10px 15px;
+    padding: 15px 20px;
+    font-weight: 600;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border: 1px solid rgba(255,255,255,0.2);
+    transition: all 0.3s ease;
+}
+
+.special-btn:hover {
+    background: rgba(255,255,255,0.2);
+    border-color: rgba(255,255,255,0.4);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.special-btn i {
+    margin-right: 10px;
+    font-size: 16px;
+}
+
+/* 收合狀態下的樣式 */
+.navbar.collapsed .nav-content {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.navbar.collapsed .nav-toggle {
+    transform: rotate(180deg);
+}
+
+.navbar.collapsed .nav-logo {
+    margin: 0 auto;
+}
+
+/* 獨立的圓形按鈕 */
+.nav-toggle-btn {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    z-index: 999;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    opacity: 0;
+    pointer-events: none;
+}
+
+.nav-toggle-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+}
+
+.navbar.collapsed ~ .nav-toggle-btn {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* 內容區域包裝器 */
+.content-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    transition: left 0.3s ease;
+    background: white;
+}
+
+/* 導覽列展開時，內容區域向左推 */
+.navbar.expanded ~ .content-wrapper {
+    left: 250px;
+}
+
+#contentFrame {
+    width: 100%;
+    height: 100%;
+    border: none;
+    background: white;
+    transition: width 0.3s ease;
+}
+
+/* 響應式設計 */
+@media (max-width: 768px) {
+    .navbar.expanded {
+        width: 200px;
+    }
+    
+    .navbar.expanded ~ .content-wrapper {
+        left: 200px;
+    }
+    
+    .nav-btn {
+        padding: 10px 15px;
+        font-size: 13px;
+    }
+}
+
+/* 動畫效果 */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateX(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.nav-btn {
+    animation: fadeIn 0.3s ease forwards;
+}
+
+.nav-btn:nth-child(1) { animation-delay: 0.1s; }
+.nav-btn:nth-child(2) { animation-delay: 0.2s; }
+.nav-btn:nth-child(3) { animation-delay: 0.3s; }
+.nav-btn:nth-child(4) { animation-delay: 0.4s; }
+.nav-btn:nth-child(5) { animation-delay: 0.5s; }
+.nav-btn:nth-child(6) { animation-delay: 0.6s; }
+.nav-btn:nth-child(7) { animation-delay: 0.7s; }
+.nav-btn:nth-child(8) { animation-delay: 0.8s; } 

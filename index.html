@@ -1,38 +1,55 @@
-<html>
-
+<!DOCTYPE html>
+<html lang="zh-TW">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=big5">
-<title>PCSHMATH W.Y.</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>遊戲首頁</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
+<body>
+    <!-- 導覽列 -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-header">
+            <div class="nav-toggle" id="navToggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            <div class="nav-logo" id="navLogo">
+                <i class="fas fa-gamepad"></i>
+            </div>
+        </div>
+        
+        <div class="nav-content" id="navContent">
+            <div class="nav-buttons">
+                <a href="#" class="nav-btn game-btn" data-content="001/index.html">GAME01</a>
+                <a href="#" class="nav-btn game-btn" data-content="002/index.html">GAME02</a>
+                <a href="#" class="nav-btn game-btn" data-content="003/index.html">GAME03</a>
+                <a href="#" class="nav-btn game-btn" data-content="004/index.html">GAME04</a>
+                <a href="#" class="nav-btn game-btn" data-content="game05.html">GAME05</a>
+                <a href="#" class="nav-btn game-btn" data-content="game06.html">GAME06</a>
+                <a href="#" class="nav-btn game-btn" data-content="game07.html">GAME07</a>
+                <a href="#" class="nav-btn game-btn" data-content="game08.html">GAME08</a>
+            </div>
+            
+            <div class="nav-special">
+                <a href="#" class="nav-btn special-btn" data-content="about.html">
+                    <i class="fas fa-info-circle"></i>
+                    <span>網站介紹</span>
+                </a>
+            </div>
+        </div>
+    </nav>
 
-<body style="background-image: url(pic2/bk319.png); color: rgb(0, 0, 0); background-color: rgb(199, 199, 255);" oncontextmenu=window.event.returnValue=false  onselectstart=event.returnValue=false alink="#000099" link="#000099" vlink="#990099" scroll="no">
+    <!-- 獨立的圓形按鈕 -->
+    <div class="nav-toggle-btn" id="navToggleBtn">
+        <i class="fas fa-bars"></i>
+    </div>
 
+    <!-- 主要內容區域 -->
+    <div class="content-wrapper" id="contentWrapper">
+        <iframe id="contentFrame" src="welcome.html" frameborder="0"></iframe>
+    </div>
 
-
-<table style="text-align: left; width: 100%; margin-left: auto; margin-right: auto; height: 100%;" background="pic2/backgr2.png" border="0" cellpadding="0" cellspacing="0" id="table3">
-
-  <tbody>
- 
-    <tr>
-      <td style="width: 130px;">
-<a href="001/index.html" target="content">Tic-Tac-Toe</a><BR>
-<a href="002/index.html" target="content">Tic-Tac-Toe 3D</a><BR>
-<a href="003/index.html" target="content">Flip it</a><BR>
-<a href="004/index.html" target="content">GAME of life</a><BR>
-<a href="005/index.html" target="content">005</a><BR>
-<a href="006/index.html" target="content">006</a><BR>
-<a href="007/index.html" target="content">007</a>
-
-      </td>
-      <td>
-		<iframe name="content" src="main0.html" frameborder="0" height="100%" width="100%"></iframe>
-      </td>
-    </tr>
-    
-  </tbody>
-</table>
-			
-
+    <script src="script.js"></script>
 </body>
-
-</html>
+</html> 
