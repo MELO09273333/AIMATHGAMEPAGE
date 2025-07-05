@@ -163,6 +163,40 @@
             opacity: 0.8;
         }
 
+        .ai-notice {
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 30px;
+            border: 1px solid rgba(255,255,255,0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .ai-notice i {
+            font-size: 1.5em;
+            color: #667eea;
+            animation: pulse 2s infinite;
+        }
+
+        .ai-notice p {
+            margin: 0;
+            font-size: 1.1em;
+            font-weight: 500;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+        }
+
         @media (max-width: 768px) {
             .header h1 {
                 font-size: 2em;
@@ -277,6 +311,10 @@
         <div class="footer">
             <p>🎮 感謝 Cursor AI 讓數學老師也能成為遊戲開發者 🎮</p>
             <p>希望這些遊戲能為您的學習和研究帶來啟發！</p>
+            <div class="ai-notice">
+                <i class="fas fa-robot"></i>
+                <p><strong>AI 提醒：</strong>這一頁的內容也是由 Cursor AI 自動生成的，展示了 AI 在內容創作方面的強大能力！</p>
+            </div>
         </div>
     </div>
 </body>
