@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Black Path Game</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="main-wrapper">
+    <div class="control-bar">
+      <label>大小：
+        <input type="number" id="board-width" min="3" max="24" value="5"> ×
+        <input type="number" id="board-height" min="3" max="24" value="5">
+      </label>
+      <button id="start-btn">開始</button>
+      <button id="reset-btn">重置</button>
+      <button id="prev-btn">上一步</button>
+      <button id="next-btn">下一步</button>
+    </div>
+    <div class="operation-bar">
+      <div class="tile-pool">
+        <img src="T3.png" alt="T3" class="tile-draggable" draggable="true" data-type="T3">
+        <img src="T2.png" alt="T2" class="tile-draggable" draggable="true" data-type="T2">
+        <img src="T1.png" alt="T1" class="tile-draggable" draggable="true" data-type="T1">
+      </div>
+      <button id="ok-btn">OK</button>
+      <span id="status-text">請按開始遊戲</span>
+    </div>
+    <div class="board-scroll">
+      <div class="board-grid" id="board-grid"></div>
+    </div>
+  </div>
+  <div class="side-panel" id="side-panel">
+    <button class="side-toggle" id="side-toggle" title="顯示/隱藏規則">●</button>
+    <div class="side-content" id="side-content">
+      <h1>遊戲介紹</h1>
+      <p style="margin-bottom:1.2em;">Black Path Game（又稱Brick）是一款兩人對戰的棋盤遊戲。玩家輪流在棋盤上延伸路徑，目標是將路徑連接到終點（基地），或讓對手無法繼續。</p>
+      <h2>基本規則</h2>
+      <ul style="line-height:1.7;">
+        <li>遊戲在m×n方格棋盤上進行，左下為起點，右上為終點。</li>
+        <li>每回合，玩家必須在延續路徑的空格放置一個連接片（T1、T2、T3）。</li>
+        <li>連接片有三種：</li>
+      </ul>
+      <div class="tile-explain">
+        <div class="tile-explain-item">
+          <img src="T1.png" alt="T1" class="tile-explain-img"><br/>
+          <b>T1</b>
+        </div>
+        <div class="tile-explain-item">
+          <img src="T2.png" alt="T2" class="tile-explain-img"><br/>
+          <b>T2</b>
+        </div>
+        <div class="tile-explain-item">
+          <img src="T3.png" alt="T3" class="tile-explain-img"><br/>
+          <b>T3</b>
+        </div>
+      </div>
+      <ul style="line-height:1.7;">
+      
+        <li>誰先將路徑連接到終點（基地）即獲勝。</li>
+        <li>若路徑連接到棋盤邊界（出界），則該玩家輸。</li>
+      </ul>
+      <h2>操作說明</h2>
+      <ul style="line-height:1.7;">
+        <li>選擇棋盤大小，點擊「開始」開始遊戲。</li>
+        <li>拖曳下方的連接片到下一步的位置。</li>
+        <li>無誤後，點擊「OK」，換對方操作。</li>
+        <li>可用「上一步」「下一步」瀏覽歷程。</li>
+        <li>右上角「重置」可重新開始。</li>
+      </ul>
+      <h2>進階說明</h2>
+      <ul style="line-height:1.7;">
+        
+        <li>若路徑遇到已放片的格子，會自動沿著連接片推進，直到遇到空格、終點或邊界。</li>
+        <li>詳細規則與數學分析可參考 <a href="https://en.wikipedia.org/wiki/Black_Path_Game" target="_blank">Black Path Game 維基百科</a>。</li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-signature">Cursor 2025 By pcshmath W.Y.</div>
+  <script src="main.js"></script>
+</body>
+</html> 
