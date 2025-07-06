@@ -31,7 +31,7 @@ class SproutsGame {
         this.lastMouseY = 0;
         
         // 畫布設定
-        this.canvasSize = 800;
+        this.canvasSize = 1000; // 增加盤面大小，提供更好的操作體驗
         
         // 控制面板狀態
         this.panelVisible = true;
@@ -126,7 +126,7 @@ class SproutsGame {
             panel.classList.add('collapsed');
             controlToggle.classList.add('visible');
         }
-        this.resizeCanvas();
+        // 移除 resizeCanvas() 調用，避免影響盤面顯示
     }
     
     showControlPanel() {
@@ -137,7 +137,7 @@ class SproutsGame {
             panel.classList.remove('collapsed');
             controlToggle.classList.remove('visible');
         }
-        this.resizeCanvas();
+        // 移除 resizeCanvas() 調用，避免影響盤面顯示
     }
     
     decreasePoints() {
@@ -202,7 +202,8 @@ class SproutsGame {
                     moveCountElement.textContent = `回合: ${this.moveCount}`;
                 }
             } else if (this.gameState === 'ended') {
-                statusElement.textContent = '遊戲結束';
+                const winnerText = this.winnerName ? `遊戲結束！${this.winnerName}獲勝！` : '遊戲結束';
+                statusElement.textContent = winnerText;
                 if (playerInfo) playerInfo.style.display = 'none';
             }
         }
@@ -217,8 +218,12 @@ class SproutsGame {
         this.canvas.width = containerWidth;
         this.canvas.height = containerHeight;
         
-        // 重置變換
-        this.scale = Math.min(containerWidth, containerHeight) / this.canvasSize;
+        // 計算適合的縮放比例，確保盤面在容器中完整顯示
+        const scaleX = containerWidth / this.canvasSize;
+        const scaleY = containerHeight / this.canvasSize;
+        this.scale = Math.min(scaleX, scaleY) * 0.9; // 留出一些邊距
+        
+        // 居中顯示盤面
         this.offsetX = (containerWidth - this.canvasSize * this.scale) / 2;
         this.offsetY = (containerHeight - this.canvasSize * this.scale) / 2;
     }
@@ -678,9 +683,8 @@ class SproutsGame {
         const winner = this.currentPlayer === 1 ? 2 : 1;
         const winnerName = winner === 1 ? '玩家1' : '玩家2';
         
-        setTimeout(() => {
-            alert(`遊戲結束！${winnerName}獲勝！`);
-        }, 100);
+        // 儲存獲勝者資訊供 UI 顯示使用
+        this.winnerName = winnerName;
         
         this.updateUI();
     }
@@ -691,6 +695,7 @@ class SproutsGame {
         this.moveCount = 0;
         this.points = [];
         this.lines = [];
+        this.winnerName = null; // 清除獲勝者資訊
         
         // 生成初始點
         this.generateRandomPoints(this.initialPoints);
@@ -707,14 +712,15 @@ class SproutsGame {
         this.lines = [];
         this.drawingPath = [];
         this.isDrawing = false;
+        this.winnerName = null; // 清除獲勝者資訊
         
         this.updateUI();
         this.draw();
     }
     
     generateRandomPoints(count) {
-        const margin = 100;
-        const minDistance = 80;
+        const margin = 150; // 增加邊距，讓點不會太靠近邊緣
+        const minDistance = 120; // 增加點之間的距離，提供更好的操作空間
         
         for (let i = 0; i < count; i++) {
             let newPoint;
