@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>納許棋 HEX - 智能對戰</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+        <!-- 頂部控制列 -->
+        <header class="control-header">
+            <div class="control-row">
+                <div class="game-title">
+                    <h1>納許棋 HEX</h1>
+                </div>
+                <div class="control-group">
+                    <label>模式</label>
+                    <select id="game-mode">
+                        <option value="ai">單人</option>
+                        <option value="two-player">雙人</option>
+                    </select>
+                </div>
+                <div class="control-group">
+                    <label>AI</label>
+                    <select id="ai-difficulty">
+                        <option value="easy">簡單</option>
+                        <option value="medium" selected>中等</option>
+                        <option value="hard">困難</option>
+                        <option value="boss">魔王</option>
+                    </select>
+                </div>
+                <div class="control-group">
+                    <label>大小</label>
+                    <div class="size-controls">
+                        <button id="decrease-size">-</button>
+                        <span id="board-size">6</span>
+                        <button id="increase-size">+</button>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <button id="undo-btn" class="action-btn">悔棋</button>
+                    <button id="restart-btn" class="action-btn">重新開始</button>
+                </div>
+                <div class="status-group">
+                    <span>玩家：<span id="current-player">藍色</span></span>
+                    <span id="game-status">遊戲進行中</span>
+                </div>
+            </div>
+        </header>
+        
+        <!-- 遊戲主區域 -->
+        <main class="main-area">
+            <div class="board-wrapper">
+                <svg id="hex-board" class="hex-board"></svg>
+            </div>
+        </main>
+    </div>
+    
+    <div class="signature">Cursor 2025 By pcshmath W.Y.</div>
+    
+    <script src="script.js"></script>
+</body>
+</html> 
